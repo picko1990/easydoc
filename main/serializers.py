@@ -37,7 +37,7 @@ class DrugSerializer(serializers.ModelSerializer):
 
 
 class PrescriptionFieldSerializer(serializers.ModelSerializer):
-    drug = DrugSerializer(read_only=True)
+    drug = DrugSerializer()
 
     class Meta:
         model = PrescriptionField
