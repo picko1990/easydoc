@@ -37,6 +37,12 @@ class DrugSerializer(serializers.ModelSerializer):
 
 
 class PrescriptionFieldSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PrescriptionField
+        fields = '__all__'
+
+
+class NestedPrescriptionFieldSerializer(serializers.ModelSerializer):
     drug = DrugSerializer()
 
     class Meta:
@@ -45,7 +51,7 @@ class PrescriptionFieldSerializer(serializers.ModelSerializer):
 
 
 class ConsultationSerializer(serializers.ModelSerializer):
-    prescription_fields = PrescriptionFieldSerializer(many=True, read_only=True)
+    prescription_fields = NestedPrescriptionFieldSerializer(many=True, read_only=True)
 
     class Meta:
         model = Consultation
