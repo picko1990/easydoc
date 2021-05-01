@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <form>
+        <input type="text" id="patient_name">
+        <input type="date" id="date">
+        <input type="time" id="time">
+    </form>
+
+
+    <!-- new Date().toISOString().split("T")[0]) -->
+
+    <button type="button" onclick=test()>ping</button>
+
+    <p id="demo"></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        function test(){
+            const url = 'http://127.0.0.1:8000/appointments/' 
+
+            const formData = new FormData();
+            formData.append('patient_name', document.querySelector('#patient_name').value);
+            formData.append('date', document.querySelector('#date').value);
+            formData.append('time', document.querySelector('#time').value);
+
+            date = new Date().toISOString().split("T")[0];
+
+            axios.get(url, {params: {date: document.querySelector('#date').value}})
+            .then(resp => {
+                console.log(resp.data);
+            });
+        }
+    </script>
+
+</body>
+</html> 
